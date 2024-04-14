@@ -7,39 +7,46 @@ import { useForm } from "react-hook-form";
 
 const LoginForm = () => {
   const { user } = useContext(Context);
-  const [name, setName] = useState();
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
   const [role, setRole] = useState();
   const [container, setContainer] = useState();
   const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register: register2, handleSubmit: handleSubmit2, formState: { errors: errors2 } } = useForm();
   const navigate = useNavigate();
 
   useEffect(() => {
     setContainer(document.getElementById("container"));
-  }, []);
+  }, [container]);
 
-  const registerFunc = async data => {
+  const registerFunc = async (data) => {
     try {
+      const { name, email, password } = data;
       if (!role) {
         setRole("Учень");
       }
       const userData = await registration(name, email, password, role);
-      user.setUser(userData);
-      console.log(user.user);
-      user.setIsAuth(true);
+      if (userData.error) {
+        alert(userData.error);
+      } else {
+        user.setUser(userData.user);
+        user.setIsAuth(true);
+        navigate("/cabinet");
+      }
     } catch (error) {
       console.log(error);
     }
   };
 
-  const loginFunc = async data => {
+  const loginFunc = async (data) => {
     try {
-      console.log(data);
+      const { email, password } = data;
       const userData = await login(email, password);
-      user.setUser(userData);
-      user.setIsAuth(true);
-      console.log(user.user);
+      if (userData.error) {
+        alert(userData.error);
+      } else {
+        user.setUser(userData.user);
+        user.setIsAuth(true);
+        navigate("/cabinet");
+      }
     } catch (error) {
       console.log(error);
     }
@@ -48,8 +55,9 @@ const LoginForm = () => {
   return (
     <div className={styles.LoginFormBody}>
       <div className={styles.container} id="container">
-        {/* login form */}
+        {/* register form */}
         <form
+          key={1}
           onSubmit={handleSubmit(registerFunc)}
           className={`${styles.formContainer} ${styles.signUp}`}
         >
@@ -63,41 +71,61 @@ const LoginForm = () => {
               })}
               placeholder="Ім'я"
             />
+            {errors.name && (
+              <p className={styles.errorText}>Введіть імя</p>
+            )}
             <input
-              onChange={e => setEmail(e.target.value)}
-              value={email}
+              {...register("email", {
+                required: true
+              })}
               type="email"
               placeholder="Пошта"
             />
+            {errors.email && (
+              <p className={styles.errorText} >Введіть email</p>
+            )}
             <input
-              onChange={e => setPassword(e.target.value)}
-              value={password}
+              {...register("password", {
+                required: true
+              })}
               type="password"
               placeholder="Пароль"
             />
+            {errors.password && (
+              <p className={styles.errorText} >Введіть пароль</p>
+            )}
             <button type="submit">Зареєструватися</button>
           </div>
         </form>
-        {/* register form */}
+        {/* login form */}
         <form
-          onSubmit={handleSubmit(loginFunc)}
+          key={2}
+          onSubmit={handleSubmit2(loginFunc)}
           className={`${styles.formContainer} ${styles.signIn}`}
         >
           <div className={styles.formLogin}>
             <img className={styles.logo} src="./Images/USTUDY.svg" alt="" />
             <h1>Вхід</h1>
             <input
-              onChange={e => setEmail(e.target.value)}
-              value={email}
+              {...register2("email", {
+                required: true
+              })}
               type="email"
               placeholder="Пошта"
             />
+            {errors2.email && (
+              <p className={styles.errorText} >Введіть email</p>
+            )}
             <input
-              onChange={e => setPassword(e.target.value)}
-              value={password}
+              {...register2("password", {
+                required: true
+              })}
               type="password"
               placeholder="Пароль"
             />
+            {errors2.password && (
+              <p className={styles.errorText} >Введіть пароль</p>
+            )}
             {/* <a href="#">Забули пароль?</a> */}
             <button type="submit">Увійти</button>
           </div>
@@ -106,7 +134,7 @@ const LoginForm = () => {
           <div className={styles.toogle}>
             <div className={`${styles.tooglePannel} ${styles.toogleLeft}`}>
               <h1>Раді тебе бачити!</h1>
-              <p>
+              <p className={styles.container_p}>
                 Введіть свої особисті дані, щоб скористатися всіма функціями
                 сайту
               </p>
@@ -120,7 +148,7 @@ const LoginForm = () => {
             </div>
             <div className={`${styles.tooglePannel} ${styles.toogleRight}`}>
               <h1>Привіт!</h1>
-              <p>
+              <p className={styles.container_p}>
                 Зареєструйтеся як викладач або студент вказавши свої особисті
                 дані
               </p>

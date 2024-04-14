@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import NavBar from "../components/cabinet/CabinetNavBar";
 import Tests from "../components/cabinet/CabinetTests";
 import Settings from "../components/cabinet/CabinetSettings";
 import styles from "../styles/cabinet/CabinetPage.module.css";
+import {Context} from "../index"
 
 const CabinetPage = () => {
   const [activeTab, setActiveTab] = useState("tests");
+  const {user} = useContext(Context)
+
+  console.log(user.user)
 
   const renderTabContent = () => {
     switch (activeTab) {

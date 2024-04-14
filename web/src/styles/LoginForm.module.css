@@ -24,7 +24,7 @@
   min-height: 480px;
 }
 
-.container p {
+.container_p {
   font-size: 14px;
   line-height: 20px;
   letter-spacing: 0.3px;
@@ -196,4 +196,15 @@
 }
 
 @media (max-width: 320px) {
+}
+
+.errorText {
+  color: #bf1650;
+  font-size: 16px;
+  margin-right: 150px;
+}
+
+.errorText::before {
+  display: inline;
+  content: "⚠ ";
 }

@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styles from "../../styles/cabinet/CabinetSettings.module.css";
 import { PencilIcon } from "../micro/Icons";
+import { Context } from "../../index"
 
 const CabinetSettings = () => {
   const [name, setNameSetting] = useState(null);
@@ -11,6 +12,8 @@ const CabinetSettings = () => {
   const [isEmailChanged, setIsEmailChanged] = useState(false);
   const [isPasswordChanged, setIsPasswordChanged] = useState(false);
 
+  const { user } = useContext(Context)
+
   return (
     <>
       <h2>Налаштування</h2>
@@ -19,7 +22,7 @@ const CabinetSettings = () => {
           <h3>Ім'я</h3>
           <div className={styles.settingContainer}>
             <span className={isNameChanged && styles.hide}>
-              Артур Ліхіцький
+              {user.user.name}
             </span>
             <input
               className={isNameChanged && styles.active}
@@ -40,7 +43,7 @@ const CabinetSettings = () => {
           <h3>Пошта</h3>
           <div className={styles.settingContainer}>
             <span className={isEmailChanged && styles.hide}>
-              artur.lihitskiy@gmail.com
+              {user.user.email}
             </span>
             <input
               className={isEmailChanged && styles.active}
@@ -60,7 +63,9 @@ const CabinetSettings = () => {
         <li>
           <h3>Пароль</h3>
           <div className={styles.settingContainer}>
-            <span className={isPasswordChanged && styles.hide}>qwerasdzxc</span>
+            <span className={isPasswordChanged && styles.hide}>
+              ********
+            </span>
             <input
               className={isPasswordChanged && styles.active}
               type="text"
@@ -78,10 +83,9 @@ const CabinetSettings = () => {
         </li>
       </ul>
       <button
-        className={`${styles.saveButton} ${
-          (isNameChanged || isEmailChanged || isPasswordChanged) &&
+        className={`${styles.saveButton} ${(isNameChanged || isEmailChanged || isPasswordChanged) &&
           styles.active
-        }`}
+          }`}
       >
         Зберегти
       </button>
