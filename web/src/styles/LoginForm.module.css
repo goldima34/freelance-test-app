@@ -53,6 +53,8 @@
   letter-spacing: 0.5px;
   text-transform: uppercase;
   margin-top: 10px;
+  max-width: 205px;
+  text-wrap: wrap;
   cursor: pointer;
 }
 
