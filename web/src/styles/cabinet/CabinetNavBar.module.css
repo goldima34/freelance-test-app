@@ -1,0 +1,41 @@
+.logo {
+  height: 20px;
+  margin-bottom: 10px;
+}
+
+.navigationList {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  gap: 12px;
+}
+
+.navigationList button {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  color: #000;
+  font-size: 12px;
+  padding: 8px 10px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.navigationList button.active {
+  box-shadow: 0 5px 25px rgb(106, 229, 109, 0.3);
+  background-color: #6ae56d;
+  color: #fff;
+}
+
+.navigationList button.active svg rect,
+.navigationList button.active svg path {
+  stroke: #fff;
+}
+
+.navigationList button span {
+  margin-left: 9px;
+}
