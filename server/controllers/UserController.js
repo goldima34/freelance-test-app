@@ -50,6 +50,12 @@ class UserController {
       console.log(e);
     }
   }
+
+  async changeName(req, res, next){
+    const {email} = req.body
+    const userData = await UserModel.findOne({where: {email}})
+    
+  }
 }
 
 module.exports = new UserController();
