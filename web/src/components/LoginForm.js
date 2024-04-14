@@ -3,6 +3,7 @@ import styles from "../styles/LoginForm.module.css";
 import { useNavigate } from "react-router-dom";
 import { Context } from "..";
 import { login, registration } from "../services/userApi";
+import { useForm } from "react-hook-form";
 
 const LoginForm = () => {
   const { user } = useContext(Context);
@@ -11,20 +12,20 @@ const LoginForm = () => {
   const [password, setPassword] = useState();
   const [role, setRole] = useState();
   const [container, setContainer] = useState();
-
+  const { register, handleSubmit, formState: { errors } } = useForm();
   const navigate = useNavigate();
 
   useEffect(() => {
     setContainer(document.getElementById("container"));
   }, []);
 
-  const registerFunc = async (name, email, password, role) => {
+  const registerFunc = async data => {
     try {
       if (!role) {
         setRole("Учень");
       }
-      const data = await registration(name, email, password, role);
-      user.setUser(data);
+      const userData = await registration(name, email, password, role);
+      user.setUser(userData);
       console.log(user.user);
       user.setIsAuth(true);
     } catch (error) {
@@ -32,10 +33,11 @@ const LoginForm = () => {
     }
   };
 
-  const loginFunc = async (email, password) => {
+  const loginFunc = async data => {
     try {
-      const data = await login(email, password);
-      user.setUser(data);
+      console.log(data);
+      const userData = await login(email, password);
+      user.setUser(userData);
       user.setIsAuth(true);
       console.log(user.user);
     } catch (error) {
@@ -46,53 +48,60 @@ const LoginForm = () => {
   return (
     <div className={styles.LoginFormBody}>
       <div className={styles.container} id="container">
-        <div className={`${styles.formContainer} ${styles.signUp}`}>
+        {/* login form */}
+        <form
+          onSubmit={handleSubmit(registerFunc)}
+          className={`${styles.formContainer} ${styles.signUp}`}
+        >
           <div className={styles.formLogin}>
             <img className={styles.logo} src="./Images/USTUDY.svg" alt="" />
             <h1>Створити аккаунт</h1>
             <input
               type="text"
-              onChange={(e) => setName(e.target.value)}
-              value={name}
+              {...register("name", {
+                required: true
+              })}
               placeholder="Ім'я"
             />
             <input
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={e => setEmail(e.target.value)}
               value={email}
               type="email"
               placeholder="Пошта"
             />
             <input
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={e => setPassword(e.target.value)}
               value={password}
               type="password"
               placeholder="Пароль"
             />
-            <button onClick={() => registerFunc(name, email, password, role)}>
-              Зареєструватися
-            </button>
+            <button type="submit">Зареєструватися</button>
           </div>
-        </div>
-        <div className={`${styles.formContainer} ${styles.signIn}`}>
+        </form>
+        {/* register form */}
+        <form
+          onSubmit={handleSubmit(loginFunc)}
+          className={`${styles.formContainer} ${styles.signIn}`}
+        >
           <div className={styles.formLogin}>
             <img className={styles.logo} src="./Images/USTUDY.svg" alt="" />
             <h1>Вхід</h1>
             <input
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={e => setEmail(e.target.value)}
               value={email}
               type="email"
               placeholder="Пошта"
             />
             <input
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={e => setPassword(e.target.value)}
               value={password}
               type="password"
               placeholder="Пароль"
             />
-            <a href="#">Забули пароль?</a>
-            <button onClick={() => loginFunc(email, password)}>Увійти</button>
+            {/* <a href="#">Забули пароль?</a> */}
+            <button type="submit">Увійти</button>
           </div>
-        </div>
+        </form>
         <div className={styles.toogleContainer}>
           <div className={styles.toogle}>
             <div className={`${styles.tooglePannel} ${styles.toogleLeft}`}>
@@ -115,24 +124,28 @@ const LoginForm = () => {
                 Зареєструйтеся як викладач або студент вказавши свої особисті
                 дані
               </p>
-              {container && (
+              {container &&
                 <button
                   className={styles.hidden}
                   id="register"
-                  onClick={() => container.classList.add(`${styles.active}`)}
+                  onClick={() => {
+                    container.classList.add(`${styles.active}`);
+                    setRole("студент");
+                  }}
                 >
                   Реєстрація як викладач
-                </button>
-              )}
-              {container && (
+                </button>}
+              {container &&
                 <button
                   className={styles.hidden}
                   id="register"
-                  onClick={() => container.classList.add(`${styles.active}`)}
+                  onClick={() => {
+                    container.classList.add(`${styles.active}`);
+                    setRole("викладач");
+                  }}
                 >
                   Реєстрація як студент
-                </button>
-              )}
+                </button>}
             </div>
           </div>
         </div>
