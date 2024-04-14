@@ -19,11 +19,24 @@
   margin-bottom: 15px;
 }
 
+.settingsList span {
+  display: block;
+}
+
+.settingsList span.hide {
+  display: none;
+}
+
 .settingsList button {
   margin-left: 8px;
   background-color: transparent;
   border: 1px solid transparent;
   cursor: pointer;
+}
+
+.settingsList button.active svg path {
+  stroke: #ff5d5d;
+  fill: #fff;
 }
 
 .settingContainer {
@@ -32,6 +45,7 @@
 }
 
 .settingContainer input {
+  display: none;
   background-color: #eee;
   border: none;
   margin: 8px 0;
@@ -40,6 +54,37 @@
   border-radius: 8px;
   width: 100%;
   outline: none;
+}
+
+.settingContainer input.active {
+  display: block;
+  background-color: #eee;
+  border: none;
+  margin: 8px 0;
+  padding: 10px 15px;
+  font-size: 13px;
+  border-radius: 8px;
+  width: 100%;
+  outline: none;
+}
+
+.saveButton {
+  color: #fff;
+  font-size: 12px;
+  padding: 10px 45px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-top: 20px;
+}
+
+.saveButton.active {
+  box-shadow: 0 5px 25px rgb(106, 229, 109, 0.3);
+  background-color: #6ae56d;
+  color: #fff;
+  cursor: pointer;
 }
 
 @keyframes paint {
