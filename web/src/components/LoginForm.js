@@ -20,8 +20,8 @@ const LoginForm = () => {
 
   const registerFunc = async (name, email, password, role) => {
     try {
-      if (!role){
-        setRole("Учень")
+      if (!role) {
+        setRole("Учень");
       }
       const data = await registration(name, email, password, role);
       user.setUser(data);
@@ -52,18 +52,18 @@ const LoginForm = () => {
             <h1>Створити аккаунт</h1>
             <input
               type="text"
-              onChange={e => setName(e.target.value)}
+              onChange={(e) => setName(e.target.value)}
               value={name}
               placeholder="Ім'я"
             />
             <input
-              onChange={e => setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
               value={email}
               type="email"
               placeholder="Пошта"
             />
             <input
-              onChange={e => setPassword(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
               value={password}
               type="password"
               placeholder="Пароль"
@@ -78,13 +78,13 @@ const LoginForm = () => {
             <img className={styles.logo} src="./Images/USTUDY.svg" alt="" />
             <h1>Вхід</h1>
             <input
-              onChange={e => setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
               value={email}
               type="email"
               placeholder="Пошта"
             />
             <input
-              onChange={e => setPassword(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
               value={password}
               type="password"
               placeholder="Пароль"
@@ -111,15 +111,28 @@ const LoginForm = () => {
             </div>
             <div className={`${styles.tooglePannel} ${styles.toogleRight}`}>
               <h1>Привіт!</h1>
-              <p>Зареєструйтеся як викладач вказавши свої особисті дані</p>
-              {container &&
+              <p>
+                Зареєструйтеся як викладач або студент вказавши свої особисті
+                дані
+              </p>
+              {container && (
                 <button
                   className={styles.hidden}
                   id="register"
                   onClick={() => container.classList.add(`${styles.active}`)}
                 >
-                  Реєстрація
-                </button>}
+                  Реєстрація як викладач
+                </button>
+              )}
+              {container && (
+                <button
+                  className={styles.hidden}
+                  id="register"
+                  onClick={() => container.classList.add(`${styles.active}`)}
+                >
+                  Реєстрація як студент
+                </button>
+              )}
             </div>
           </div>
         </div>
