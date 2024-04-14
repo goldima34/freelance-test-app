@@ -34,14 +34,14 @@ class UserController {
     }
   }
 
-  async login(req, res) {
+  async login(req, res, next) {
     try {
        const {email, password} = req.body
-        const userData = await User.findOne({where: {email}})
+        const userData = await UserModel.findOne({where: {email}})
         if (!userData) {
           return next(ApiError.internal("Користувача з таким Email не знайденно"));
         }
-        let comparePassword = bcrypt.compareSync(password, user.password)
+        let comparePassword = bcrypt.compareSync(password, userData.password);
         if (!comparePassword) {
             return next(ApiError.internal('Невірний пароль'))
         }

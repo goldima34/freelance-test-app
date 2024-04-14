@@ -1,8 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import styles from "../styles/LoginForm.module.css";
 import { useNavigate } from "react-router-dom";
+import { Context } from "..";
 
 const LoginForm = () => {
+  const {user} = useContext(Context);
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   const [container, setContainer] = useState();
@@ -19,7 +21,7 @@ const LoginForm = () => {
         <div className={styles.container} id="container">
           <div className={`${styles.formContainer} ${styles.signUp}`}>
             <div className={styles.formLogin}>
-              <img className={styles.logo} src="./Images/USTUDY.svg" />
+              <img className={styles.logo} src="./Images/USTUDY.svg" alt=""/>
               <h1>Створити аккаунт</h1>
               <input type="text" placeholder="Ім'я" />
               <input
@@ -37,13 +39,13 @@ const LoginForm = () => {
               <button
               //onClick={() => registerFunc(email, password)}
               >
-                Увійти
+                Зареєструватися
               </button>
             </div>
           </div>
           <div className={`${styles.formContainer} ${styles.signIn}`}>
             <div className={styles.formLogin}>
-              <img className={styles.logo} src="./Images/USTUDY.svg" />
+              <img className={styles.logo} src="./Images/USTUDY.svg" alt=""/>
               <h1>Вхід</h1>
               <input
                 //onChange={(e) => setEmail(e.target.value)}
