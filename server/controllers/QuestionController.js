@@ -23,6 +23,16 @@ class QuestionController {
       console.log(error);
     }
   }
+
+  async get(req,res) {
+    try {
+      const { TestId } = req.body;
+      const Question = await QuestionModel.findAll({ where: {TestId: TestId} });
+      return res.json(Question);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
 
 module.exports = new QuestionController();

@@ -10,23 +10,28 @@ const LoginForm = () => {
   const [role, setRole] = useState();
   const [container, setContainer] = useState();
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const { register: register2, handleSubmit: handleSubmit2, formState: { errors: errors2 } } = useForm();
+  const {
+    register: register2,
+    handleSubmit: handleSubmit2,
+    formState: { errors: errors2 }
+  } = useForm();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    setContainer(document.getElementById("container"));
-  }, [container]);
+  useEffect(
+    () => {
+      setContainer(document.getElementById("container"));
+    },
+    [container]
+  );
 
-  const registerFunc = async (data) => {
+  const registerFunc = async data => {
     try {
       const { name, email, password } = data;
-      if (!role) {
-        setRole("Учень");
-      }
       const userData = await registration(name, email, password, role);
       if (userData.error) {
         alert(userData.error);
       } else {
+        console.log(userData.user.role);
         user.setUser(userData.user);
         user.setIsAuth(true);
         navigate("/cabinet");
@@ -36,7 +41,7 @@ const LoginForm = () => {
     }
   };
 
-  const loginFunc = async (data) => {
+  const loginFunc = async data => {
     try {
       const { email, password } = data;
       const userData = await login(email, password);
@@ -71,9 +76,7 @@ const LoginForm = () => {
               })}
               placeholder="Ім'я"
             />
-            {errors.name && (
-              <p className={styles.errorText}>Введіть імя</p>
-            )}
+            {errors.name && <p className={styles.errorText}>Введіть імя</p>}
             <input
               {...register("email", {
                 required: true
@@ -81,9 +84,7 @@ const LoginForm = () => {
               type="email"
               placeholder="Пошта"
             />
-            {errors.email && (
-              <p className={styles.errorText} >Введіть email</p>
-            )}
+            {errors.email && <p className={styles.errorText}>Введіть email</p>}
             <input
               {...register("password", {
                 required: true
@@ -91,9 +92,8 @@ const LoginForm = () => {
               type="password"
               placeholder="Пароль"
             />
-            {errors.password && (
-              <p className={styles.errorText} >Введіть пароль</p>
-            )}
+            {errors.password &&
+              <p className={styles.errorText}>Введіть пароль</p>}
             <button type="submit">Зареєструватися</button>
           </div>
         </form>
@@ -113,9 +113,7 @@ const LoginForm = () => {
               type="email"
               placeholder="Пошта"
             />
-            {errors2.email && (
-              <p className={styles.errorText} >Введіть email</p>
-            )}
+            {errors2.email && <p className={styles.errorText}>Введіть email</p>}
             <input
               {...register2("password", {
                 required: true
@@ -123,9 +121,8 @@ const LoginForm = () => {
               type="password"
               placeholder="Пароль"
             />
-            {errors2.password && (
-              <p className={styles.errorText} >Введіть пароль</p>
-            )}
+            {errors2.password &&
+              <p className={styles.errorText}>Введіть пароль</p>}
             {/* <a href="#">Забули пароль?</a> */}
             <button type="submit">Увійти</button>
           </div>
@@ -158,7 +155,7 @@ const LoginForm = () => {
                   id="register"
                   onClick={() => {
                     container.classList.add(`${styles.active}`);
-                    setRole("студент");
+                    setRole("викладач");
                   }}
                 >
                   Реєстрація як викладач
@@ -169,7 +166,7 @@ const LoginForm = () => {
                   id="register"
                   onClick={() => {
                     container.classList.add(`${styles.active}`);
-                    setRole("викладач");
+                    setRole("студент");
                   }}
                 >
                   Реєстрація як студент

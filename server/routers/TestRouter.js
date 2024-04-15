@@ -5,6 +5,6 @@ const router = new Router();
 
 router.post("/create", TestController.create);
 router.post("/delete", TestController.delete);
-router.post("/getAll", TestController.getAll);
+router.get("/getAll", TestController.getAll);
 
 module.exports = router;

@@ -27,7 +27,7 @@ class TestController {
 
   async getAll(req, res) {
     try {
-      const Test = await TestModel.find();
+      const Test = await TestModel.findAll();
       return res.json(Test);
     } catch (error) {
       console.log(error);
