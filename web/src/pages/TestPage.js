@@ -3,6 +3,8 @@ import { useLocation } from "react-router-dom";
 import style from "../styles/TestPage.module.css";
 import { getQuestionsByTestId } from "../services/TestApi";
 import { TestForm } from "../components/TestForm";
+import { ExitTest } from "../components/test-modals/ExitTest";
+import { CompletedTest } from "../components/test-modals/CompletedTest";
 
 export const TestPage = () => {
   const location = useLocation();
@@ -27,14 +29,18 @@ export const TestPage = () => {
   }
 
   return (
-    <div className={style.questionsContainer}>
-      <div className={style.questionsForm}>
-        {questions.map(question => <TestForm question={question} />)}
-        <div className={style.buttonContainer}>
-          <button className={style.rejectBtn}>Вийти</button>
-          <button className={style.accepBtn}>Завершити</button>
+    <>
+      <div className={style.questionsContainer}>
+        <div className={style.questionsForm}>
+          {questions.map(question => <TestForm question={question} />)}
+          <div className={style.buttonContainer}>
+            <button className={style.rejectBtn}>Вийти</button>
+            <button className={style.accepBtn}>Завершити</button>
+          </div>
         </div>
       </div>
-    </div>
+      <ExitTest/>
+      <CompletedTest/>
+    </>
   );
 };
