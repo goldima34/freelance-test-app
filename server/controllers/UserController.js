@@ -7,13 +7,13 @@ class UserController {
     try {
       const { name, email, password, role } = req.body;
       if (!name) {
-        return res.json({ error: "Введіть імя"});
+        return res.json({ error: "Введіть імя" });
       }
       if (!email || !password) {
-        return res.json({ error: "Неккоректний email або password"});
+        return res.json({ error: "Неккоректний email або password" });
       }
       if (!role) {
-        return res.json({ error: "Не вибрана роль"});
+        return res.json({ error: "Не вибрана роль" });
       }
       const candidate = await UserModel.findOne({ where: { email } });
       if (candidate) {
@@ -26,7 +26,7 @@ class UserController {
         password: hashPassword,
         role: role
       });
-      return res.json({user: userData});
+      return res.json({ user: userData });
     } catch (e) {
       console.log(e);
     }
@@ -34,25 +34,56 @@ class UserController {
 
   async login(req, res, next) {
     try {
-      const { email, password } = req.body
-      const userData = await UserModel.findOne({ where: { email } })
+      const { email, password } = req.body;
+      const userData = await UserModel.findOne({ where: { email } });
       if (!userData) {
-        return res.json({ error: "Користувача з таким Email не знайденно"});
+        return res.json({ error: "Користувача з таким Email не знайденно" });
       }
       let comparePassword = bcrypt.compareSync(password, userData.password);
       if (!comparePassword) {
-        return res.json({ error: 'Невірний пароль'})
+        return res.json({ error: "Невірний пароль" });
       }
-      return res.json({user: userData});
+      return res.json({ user: userData });
     } catch (e) {
       console.log(e);
     }
   }
 
-  async changeName(req, res, next) {
-    const { email } = req.body
-    const userData = await UserModel.findOne({ where: { email } })
+  async changeName(req, res) {
+    try {
+      const { id, newName } = req.body;
+      const userData = await UserModel.findOne({ where: { id } });
+      userData.name = newName;
+      await userData.save();
+      res.json(userData);
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
+  async changeEmail(req, res) {
+    try {
+      const { id, newEmail } = req.body;
+      const userData = await UserModel.findOne({ where: { id } });
+      userData.email = newEmail;
+      await userData.save();
+      res.json(userData);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async changePassword(req, res) {
+    try {
+      const { id, newPassword } = req.body;
+      const userData = await UserModel.findOne({ where: { id } });
+      const hashPassword = await bcrypt.hash(newPassword, 5);
+      userData.password = hashPassword;
+      await userData.save();
+      res.json(userData);
+    } catch (e) {
+      console.log(e);
+    }
   }
 }
 

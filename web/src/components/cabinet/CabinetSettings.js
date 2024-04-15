@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import styles from "../../styles/cabinet/CabinetSettings.module.css";
 import { PencilIcon } from "../micro/Icons";
 import { Context } from "../../index"
+import { changeEmail, changeName, changePassword } from "../../services/userApi";
 
 const CabinetSettings = () => {
   const [name, setNameSetting] = useState(null);
@@ -13,6 +14,19 @@ const CabinetSettings = () => {
   const [isPasswordChanged, setIsPasswordChanged] = useState(false);
 
   const { user } = useContext(Context)
+
+  const click = async () => {
+    if(name){
+      changeName(user.user.id, name).then(data => user.setUser(data))
+    }
+    if(email){
+      changeEmail(user.user.id, email).then(data => user.setUser(data))
+
+    }
+    if(password){
+      changePassword(user.user.id, password).then(data => user.setUser(data))
+    }
+  }
 
   return (
     <>
@@ -27,6 +41,7 @@ const CabinetSettings = () => {
             <input
               className={isNameChanged && styles.active}
               type="text"
+              onChange={e => setNameSetting(e.target.value)}
               placeholder="Нове ім'я"
             />
             <button
@@ -48,6 +63,7 @@ const CabinetSettings = () => {
             <input
               className={isEmailChanged && styles.active}
               type="text"
+              onChange={e => setEmailSetting(e.target.value)}
               placeholder="Нова пошта"
             />
             <button
@@ -69,6 +85,7 @@ const CabinetSettings = () => {
             <input
               className={isPasswordChanged && styles.active}
               type="text"
+              onChange={e => setPasswordSetting(e.target.value)}
               placeholder="Новий пароль"
             />
             <button
@@ -86,6 +103,7 @@ const CabinetSettings = () => {
         className={`${styles.saveButton} ${(isNameChanged || isEmailChanged || isPasswordChanged) &&
           styles.active
           }`}
+          onClick={click}
       >
         Зберегти
       </button>

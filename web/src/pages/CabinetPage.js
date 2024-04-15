@@ -4,13 +4,12 @@ import Tests from "../components/cabinet/CabinetTests";
 import Settings from "../components/cabinet/CabinetSettings";
 import styles from "../styles/cabinet/CabinetPage.module.css";
 import {Context} from "../index"
+import { useNavigate } from "react-router-dom";
 
 const CabinetPage = () => {
   const [activeTab, setActiveTab] = useState("tests");
   const {user} = useContext(Context)
-
-  console.log(user.user)
-
+  const navigate = useNavigate()
   const renderTabContent = () => {
     switch (activeTab) {
       case "tests":
@@ -23,6 +22,11 @@ const CabinetPage = () => {
         return null;
     }
   };
+
+  
+  if(!user.isAuth){
+    navigate("/")
+  }
 
   return (
     <div className={styles.CabinetPageBody}>

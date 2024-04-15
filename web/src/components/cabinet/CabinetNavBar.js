@@ -1,15 +1,20 @@
 import React, { useState } from "react";
 import styles from "../../styles/cabinet/CabinetNavBar.module.css";
 import { SettingsIcon, SignOutIcon, TestsIcon } from "../micro/Icons";
+import { logout } from "../../services/userApi";
+import { useNavigate } from "react-router-dom";
 
 const CabinetNavBar = ({ onTabChange }) => {
   const [activeButton, setActiveButton] = useState("tests");
-
+  const navigate = useNavigate()
   const handleTabChange = (tab) => {
     setActiveButton(tab);
     onTabChange(tab);
   };
-
+  const logoutClick = () => {
+    logout()
+    navigate("/")
+  }
   return (
     <>
       <ul className={styles.navigationList}>
@@ -33,7 +38,9 @@ const CabinetNavBar = ({ onTabChange }) => {
           </button>
         </li>
         <li>
-          <button>
+          <button
+            onClick={logoutClick}
+          >
             <SignOutIcon />
             <span>Вихід</span>
           </button>

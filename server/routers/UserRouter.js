@@ -5,8 +5,8 @@ const router = new Router();
 
 router.post("/register", UserController.registration);
 router.post("/login", UserController.login);
-router.post("/changeName", UserController.login);
-router.post("/changeEmail", UserController.login);
-router.post("/changePassword", UserController.login);
+router.post("/changeName", UserController.changeName);
+router.post("/changeEmail", UserController.changeEmail);
+router.post("/changePassword", UserController.changePassword);
 
 module.exports = router;
