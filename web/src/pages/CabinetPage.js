@@ -24,13 +24,10 @@ const CabinetPage = () => {
         return <TestSettings onTabChange={setActiveTab} />;
       case "settings":
         return <Settings />;
-<<<<<<< HEAD
-=======
       case "raiting":
         return <CabinetRaiting />;
       case "somethingElse":
         return null;
->>>>>>> 12436545ebfea7140bd626f6c1947d8de0915bce
       default:
         return null;
     }
