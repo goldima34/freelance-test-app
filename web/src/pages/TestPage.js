@@ -7,7 +7,8 @@ import { TestForm } from "../components/TestForm";
 export const TestPage = () => {
   const location = useLocation();
   const [questions, setQuestions] = useState();
-  
+  const [endTest, setEndTest] = useState(false);
+
   localStorage.setItem("correctAnswers", 0)
 
   useEffect(
@@ -26,8 +27,14 @@ export const TestPage = () => {
   }
 
   return (
-    <div>
-      {questions.map(question => <TestForm question={question} />)}
+    <div className={style.questionsContainer}>
+      <div className={style.questionsForm}>
+        {questions.map(question => <TestForm question={question} />)}
+        <div className={style.buttonContainer}>
+          <button className={style.rejectBtn}>Вийти</button>
+          <button className={style.accepBtn}>Завершити</button>
+        </div>
+      </div>
     </div>
   );
 };

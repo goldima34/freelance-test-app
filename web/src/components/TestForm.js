@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { getAnswerByQuestionId } from "../services/TestApi";
+import style from "../styles/TestForm.module.css"
 
 export const TestForm = ({ question }) => {
   const [answers, setAnswers] = useState();
   const [answer, setAnswer] = useState();
-  
+
   useEffect(
     () => {
       getAnswerByQuestionId(question.id).then(data => setAnswers(data));
@@ -19,19 +20,19 @@ export const TestForm = ({ question }) => {
   }
 
   return (
-    <div>
-      {question.Title}
+    <div className={style.oneQuestionContainer}>
+      <p className={style.questionTitle}>{question.Title}</p>
       {answers.map(answer => (
         <div>
-          <p>{answer.Title}</p>
           <input
-            type="checkbox"
+            type="radio"
+            name={question.id}
             id={answer.id}
             onChange={() => setAnswer(answer.id)}
           />
+          <span>{answer.Title}</span>    
         </div>
       ))}
-      <hr />
     </div>
   );
 };

@@ -1,0 +1,35 @@
+.questionsContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.questionsForm {
+    background-color: #fff;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    padding: 30px;
+    margin: 20px;
+}
+
+.rejectBtn {
+    background-color: #ff4d4dc6;
+    color: #fff;
+    border: none;
+    padding: 10px 10px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.accepBtn {
+    background-color: #6ae56d;
+    color: #fff;
+    border: none;
+    padding: 10px 10px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: space-between;
+}
