@@ -11,6 +11,12 @@ export const registration = async (name, email, password, role) => {
   return data;
 };
 
+export const getOneUser = async (id) => {
+  const { data } = await $api.get("/user/get", { params: {id}});
+  return data;
+};
+
+
 export const login = async (email, password) => {
   const { data } = await $api.post("/user/login", { email, password });
   return data;

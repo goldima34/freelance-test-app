@@ -43,6 +43,17 @@ const CabinetNavBar = ({ onTabChange }) => {
           </button>
         </li>
         }
+        {user.user.role === "викладач" && 
+          <li>
+          <button
+            className={activeButton === "raiting" ? styles.active : ""}
+            onClick={() => handleTabChange("raiting")}
+          >
+            <TestsIcon />
+            <span>Оцінки учнів</span>
+          </button>
+        </li>
+        }
         <li>
           <button
             className={activeButton === "settings" ? styles.active : ""}

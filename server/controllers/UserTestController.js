@@ -10,15 +10,24 @@ class UserTestController {
         QuestionCount,
         CorrectAnswerCount
       } = req.body;
-
+      console.log(req.body)
       const UserTest = await UserTestModel.create({
         UserId: UserId,
         TestId: TestId,
         Time: Time,
-        QuestionCount: QuestionCount,
+        QuestionsCount: QuestionCount,
         CorrectAnswerCount: CorrectAnswerCount
       });
       
+      return res.json(UserTest);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async getAll(req, res){
+    try {
+      const UserTest = await UserTestModel.findAll()
       return res.json(UserTest);
     } catch (error) {
       console.log(error);

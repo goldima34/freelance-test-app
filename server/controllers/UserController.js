@@ -85,6 +85,16 @@ class UserController {
       console.log(e);
     }
   }
+
+  async getOne(req,res) {
+    try {
+      const { id } = req.query;
+      const userData = await UserModel.findOne({ where: { id } });
+      res.json(userData);
+    } catch (error) {
+      console.log(error)
+    }
+  }
 }
 
 module.exports = new UserController();

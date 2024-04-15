@@ -33,6 +33,16 @@ class TestController {
       console.log(error);
     }
   }
+
+  async get(req, res) {
+    try {
+      const {id} = req.query
+      const Test = await TestModel.findOne({ where:{ id: id }});
+      return res.json(Test);
+    } catch (error) {
+      console.log(error)
+    }
+  }
 }
 
 module.exports = new TestController();
