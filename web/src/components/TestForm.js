@@ -33,8 +33,9 @@ export const TestForm = ({ question }) => {
     <div className={style.oneQuestionContainer}>
       <p className={style.questionTitle}>{question.Title}</p>
       {answers.map(answer => (
-        <div>
+        <div style={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
           <input
+            style={{margin: 0, width: 20, marginRight: 5}}
             type="radio"
             name={question.id}
             id={answer.id}

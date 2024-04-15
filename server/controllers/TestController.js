@@ -3,12 +3,12 @@ const TestModel = require("../models/TestModel");
 class TestController {
   async create(req, res) {
     try {
-      const { UserId, Title, TimeToComplete } = req.body;
+      const { UserId, Title } = req.body;
       const Test = await TestModel.create({
         UserId: UserId,
         Title: Title,
-        TimeToComplete: TimeToComplete
       });
+      console.log(Test)
       return res.json(Test);
     } catch (error) {
       console.log(error);

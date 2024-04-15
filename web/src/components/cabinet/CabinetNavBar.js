@@ -35,8 +35,8 @@ const CabinetNavBar = ({ onTabChange }) => {
         {user.user.role === "викладач" && 
           <li>
           <button
-            className={activeButton === "makeTests" ? styles.active : ""}
-            onClick={() => handleTabChange("tests")}
+            className={activeButton === "newTest" ? styles.active : ""}
+            onClick={() => handleTabChange("newTest")}
           >
             <TestsIcon />
             <span>Створити тест</span>

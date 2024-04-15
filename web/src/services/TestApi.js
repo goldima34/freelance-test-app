@@ -29,3 +29,12 @@ export const getTestName = async (id) => {
   const { data } = await $api.get("/test/get", { params: { id } });
   return data;
 }
+
+export const createTest = async (questions, UserId) => {
+  questions.map((element) => {
+    let Title = element.question
+    $api.post("/test/create", { UserId, Title}
+  )})
+  // const { data } = await $api.post("/test/create", { UserId, });
+  // return data;
+}

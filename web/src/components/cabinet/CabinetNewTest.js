@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styles from "../../styles/cabinet/CabinetNewTest.module.css";
 import { DeleteIcon, AcceptIcon, PencilIcon } from "../micro/Icons";
+import { createTest } from "../../services/TestApi";
+import {Context} from "../../index"
 
 const CabinetNewTest = ({ onTabChange }) => {
+  const {user} = useContext(Context)
   const [questions, setQuestions] = useState([
     { question: "", answers: [""], correctAnswerIndex: 0 },
   ]);
@@ -11,6 +14,10 @@ const CabinetNewTest = ({ onTabChange }) => {
   const handleTabChange = (tab) => {
     onTabChange(tab);
   };
+
+  const onSubmit = () => {
+    createTest(questions, user.user.id)
+  }
 
   const handleAddQuestion = () => {
     setQuestions([
@@ -168,7 +175,7 @@ const CabinetNewTest = ({ onTabChange }) => {
         </button>
         <button
           className={styles.backButton}
-          onClick={() => handleTabChange("tests")}
+          onClick={() => onSubmit()}
         >
           Зберегти
         </button>
