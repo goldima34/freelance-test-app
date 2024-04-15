@@ -16,7 +16,7 @@ const CabinetNewTest = ({ onTabChange }) => {
   };
 
   const onSubmit = () => {
-    createTest(questions, user.user.id)
+    createTest(testTitle, questions, user.user.id)
   }
 
   const handleAddQuestion = () => {

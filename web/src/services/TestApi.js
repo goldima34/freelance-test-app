@@ -6,17 +6,17 @@ export const getAllTests = async () => {
 };
 
 export const getQuestionsByTestId = async TestId => {
-  const { data } = await $api.post("/question/findQuestions", {TestId});
+  const { data } = await $api.post("/question/findQuestions", { TestId });
   return data;
 };
 
 export const getAnswerByQuestionId = async QuestionId => {
-  const { data } = await $api.post("/answer/get", {QuestionId});
+  const { data } = await $api.post("/answer/get", { QuestionId });
   return data;
 };
 
-export const createUserTest = async ( UserId, TestId, Time, QuestionCount, CorrectAnswerCount) => {
-  const { data } = await $api.post("/userTest/create", {UserId, TestId, Time, QuestionCount, CorrectAnswerCount});
+export const createUserTest = async (UserId, TestId, Time, QuestionCount, CorrectAnswerCount) => {
+  const { data } = await $api.post("/userTest/create", { UserId, TestId, Time, QuestionCount, CorrectAnswerCount });
   return data;
 }
 
@@ -30,11 +30,16 @@ export const getTestName = async (id) => {
   return data;
 }
 
-export const createTest = async (questions, UserId) => {
+export const createTest = async (testTitle, questions, UserId) => {
+  console.log(questions)
+
+  const test = await $api.post("/test/create", { UserId, Title: testTitle }) // робимо тест
+
   questions.map((element) => {
     let Title = element.question
-    $api.post("/test/create", { UserId, Title}
-  )})
+    $api.post("/question/create", { TestId: test.data.id, Title }) // питання робимо
+    console.log(element)
+  })
   // const { data } = await $api.post("/test/create", { UserId, });
   // return data;
 }
