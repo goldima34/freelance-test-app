@@ -1,9 +1,9 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../database");
 
-const Question = sequelize.define("User", {
+const Question = sequelize.define("Question", {
   TestId: { type: DataTypes.INTEGER },
-  Title: { type: DataTypes.STRING },
+  Title: { type: DataTypes.STRING }
 });
 
 module.exports = Question;

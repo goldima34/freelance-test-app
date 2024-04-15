@@ -24,4 +24,15 @@ class TestController {
       console.log(error);
     }
   }
+
+  async getAll(req, res) {
+    try {
+      const Test = await TestModel.find();
+      return res.json(Test);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
+
+module.exports = new TestController();
