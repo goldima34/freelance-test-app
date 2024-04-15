@@ -14,3 +14,18 @@ export const getAnswerByQuestionId = async QuestionId => {
   const { data } = await $api.post("/answer/get", {QuestionId});
   return data;
 };
+
+export const createUserTest = async ( UserId, TestId, Time, QuestionCount, CorrectAnswerCount) => {
+  const { data } = await $api.post("/userTest/create", {UserId, TestId, Time, QuestionCount, CorrectAnswerCount});
+  return data;
+}
+
+export const getUserTest = async () => {
+  const { data } = await $api.get("/userTest/get");
+  return data;
+}
+
+export const getTestName = async (id) => {
+  const { data } = await $api.get("/test/get", { params: { id } });
+  return data;
+}

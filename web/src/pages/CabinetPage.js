@@ -5,6 +5,7 @@ import Settings from "../components/cabinet/CabinetSettings";
 import styles from "../styles/cabinet/CabinetPage.module.css";
 import {Context} from "../index"
 import { useNavigate } from "react-router-dom";
+import { CabinetRaiting } from "../components/cabinet/CabinetRaiting";
 
 const CabinetPage = () => {
   const [activeTab, setActiveTab] = useState("tests");
@@ -16,6 +17,8 @@ const CabinetPage = () => {
         return <Tests />;
       case "settings":
         return <Settings />;
+      case "raiting":
+        return <CabinetRaiting />;
       case "somethingElse":
         return null;
       default:
