@@ -82,3 +82,33 @@ export const PencilIcon = () => {
     </svg>
   );
 };
+
+export const DeleteIcon = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="27"
+      height="27"
+      viewBox="0 0 24 24"
+      fill="none"
+    >
+      <circle cx="12" cy="12" r="9" stroke="#FF2E00" />
+      <path d="M7.5 12H16.5" stroke="#FF2E00" />
+    </svg>
+  );
+};
+
+export const AcceptIcon = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="27"
+      height="27"
+      viewBox="0 0 24 24"
+      fill="none"
+    >
+      <circle cx="12" cy="12" r="9" stroke="#222222" />
+      <path d="M8 12L11 15L16 9" stroke="#222222" />
+    </svg>
+  );
+};

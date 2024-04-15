@@ -1,0 +1,127 @@
+.questionsList {
+  list-style: none;
+  gap: 20px;
+  min-width: 400px;
+}
+
+.questionsList li {
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.questionsList li:hover {
+  animation: paint 0.6s forwards;
+}
+
+.answersList {
+  list-style: none;
+  gap: 20px;
+}
+
+.answersList li {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding-top: 30px;
+}
+
+.answersList input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ccc;
+  border-radius: 3px;
+  outline: none;
+  margin: 0px 10px;
+  cursor: pointer;
+}
+
+.answersList input[type="checkbox"]:checked::before {
+  content: "\2714";
+  display: block;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  line-height: 20px;
+  background-color: #6ae56d;
+  border-radius: 3px;
+  color: #fff;
+}
+
+.buttonsContainer {
+  width: 100%;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.actionButton {
+  background-color: #fff;
+  border: 1px solid transparent;
+  padding: 5px;
+  border-radius: 8px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.changeButton {
+  background-color: #fff;
+  border: 1px solid transparent;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.deleteAnswerButton {
+  top: 5px;
+  right: 5px;
+  background-color: #fff;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  position: absolute;
+  cursor: pointer;
+}
+
+.deleteAnswerButton svg circle {
+  stroke: transparent;
+}
+
+.newQuestionButton {
+  color: #000;
+  font-size: 12px;
+  padding: 10px 15px;
+  background-color: #fff;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-top: 20px;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.backButton {
+  color: #fff;
+  font-size: 12px;
+  padding: 10px 45px;
+  background-color: #6ae56d;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-top: 20px;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgb(106, 229, 109, 0.7);
+}
+
+@keyframes paint {
+  0% {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+  100% {
+    box-shadow: 0 5px 15px rgb(106, 229, 109, 0.7);
+  }
+}
