@@ -8,7 +8,6 @@ class TestController {
         UserId: UserId,
         Title: Title,
       });
-      console.log(Test)
       return res.json(Test);
     } catch (error) {
       console.log(error);

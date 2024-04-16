@@ -15,8 +15,10 @@ export const RaitingCart = ({raitingData}) => {
 
 
   useEffect(() => {
-    getOneUser(raitingData.UserId).then(data => setUserName(data.name))
-    getTestName(raitingData.TestId).then(data => setTestTitle(data.Title))
+    try {
+      getOneUser(raitingData.UserId).then(data => setUserName(data.name))
+      getTestName(raitingData.TestId).then(data => data.Title && setTestTitle(data.Title))  
+    } catch (error) {}
   }, [])
 
   if(!userName || !testTitle){
@@ -30,7 +32,7 @@ export const RaitingCart = ({raitingData}) => {
   return (
     <>
         <div className={style.RaitingCart}>
-            <span>Назва тесту: {testTitle}</span>
+            {testTitle ? <span>Назва тесту: {testTitle}</span> : <span>Loading</span> }
             <span>Студент: {userName}</span>
             <span>Час виконання: {raitingData.Time}</span>
             <span>Правильних: {raitingData.CorrectAnswerCount}/{raitingData.QuestionsCount}</span>

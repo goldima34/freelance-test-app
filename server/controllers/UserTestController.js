@@ -10,7 +10,7 @@ class UserTestController {
         QuestionCount,
         CorrectAnswerCount
       } = req.body;
-      console.log(req.body)
+  
       const UserTest = await UserTestModel.create({
         UserId: UserId,
         TestId: TestId,

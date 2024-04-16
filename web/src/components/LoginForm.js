@@ -31,7 +31,6 @@ const LoginForm = () => {
       if (userData.error) {
         alert(userData.error);
       } else {
-        console.log(userData.user.role);
         user.setUser(userData.user);
         user.setIsAuth(true);
         navigate("/cabinet");

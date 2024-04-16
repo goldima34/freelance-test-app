@@ -7,7 +7,6 @@ export const registration = async (name, email, password, role) => {
     password,
     role
   });
-  console.log(data);
   return data;
 };
 

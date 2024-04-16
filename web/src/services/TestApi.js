@@ -31,15 +31,22 @@ export const getTestName = async (id) => {
 }
 
 export const createTest = async (testTitle, questions, UserId) => {
-  console.log(questions)
 
   const test = await $api.post("/test/create", { UserId, Title: testTitle }) // робимо тест
+  const TestId = test.data.id
+  const Title = test.data.Title
 
-  questions.map((element) => {
+  for (const element of questions) {
     let Title = element.question
-    $api.post("/question/create", { TestId: test.data.id, Title }) // питання робимо
-    console.log(element)
-  })
-  // const { data } = await $api.post("/test/create", { UserId, });
-  // return data;
+    const question = await $api.post("/question/create", { TestId, Title }) // робимо питання 
+    const QuestionId = question.data.id
+
+    const answer = await $api.post("/answer/create", { QuestionId, Title: element.answers[element.correctAnswerIndex], IsCorrect:true }) // робимо коректні відповіді
+
+    let answers = element.answers
+    const newAnswers = element.answers.filter((answers, index) => index !== element.correctAnswerIndex);
+    for(const answers of newAnswers){
+      $api.post("/answer/create", { QuestionId, Title: answers, IsCorrect:false }) // робимо не коректні відповіді
+    }
+  }
 }
