@@ -1,35 +1,55 @@
 .questionsContainer {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .questionsForm {
-    background-color: #fff;
-    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
-    border-radius: 20px;
-    padding: 30px;
-    margin: 20px;
+  background-color: #fff;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  min-width: 400px;
+  max-width: 600px;
+  padding: 30px;
+  margin: 20px;
+}
+
+.timeCorner {
+  margin: 10px;
+  font-size: 20px;
+  font-weight: 500;
 }
 
 .rejectBtn {
-    background-color: #ff4d4dc6;
-    color: #fff;
-    border: none;
-    padding: 10px 10px;
-    border-radius: 20px;
-    cursor: pointer;
+  background-color: #ff4d4dc6;
+  color: #fff;
+  font-size: 12px;
+  padding: 10px 45px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-top: 20px;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(255, 77, 77, 0.7);
 }
 
 .accepBtn {
-    background-color: #6ae56d;
-    color: #fff;
-    border: none;
-    padding: 10px 10px;
-    border-radius: 20px;
-    cursor: pointer;
+  color: #fff;
+  font-size: 12px;
+  padding: 10px 45px;
+  background-color: #6ae56d;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-top: 20px;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgb(106, 229, 109, 0.7);
 }
 
 .buttonContainer {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }

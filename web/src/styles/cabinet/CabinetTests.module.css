@@ -4,6 +4,7 @@
   flex-direction: column;
   gap: 20px;
   list-style: none;
+  min-width: 400px;
 }
 
 .testsList li {
