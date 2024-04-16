@@ -1,7 +1,8 @@
 const AnswerModel = require("../models/AnswerModel")
 
 class AnswerController {
-  async create(req, res) {
+  // створення відповідей
+  async create(req, res) { 
     try {
       const { QuestionId, Title, IsCorrect } = req.body;
       const Answer = await AnswerModel.create({
@@ -14,7 +15,7 @@ class AnswerController {
       console.log(error);
     }
   }
-
+  // видаляння відповідей
   async delete(req, res) {
     try {
       const { id } = req.body;
@@ -24,7 +25,7 @@ class AnswerController {
       console.log(error);
     }
   }
-
+  // шукаємо відповідь по айді питання
   async get(req,res){
     try {
       const { QuestionId } = req.body;

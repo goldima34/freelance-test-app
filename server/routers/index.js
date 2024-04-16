@@ -7,10 +7,12 @@ const UserTestRouter = require("./UserTestRouter")
 
 const router = new Router()
 
+// глобальна маршрутизація по серверу
+
 router.use('/user', UserRouter)
 router.use("/answer", AnswerRouter);
 router.use("/question", QuestionRouter);
 router.use("/test", TestRouter);
-router.use("/userTest", UserTestRouter);
+router.use("/userTest", UserTestRouter); 
 
 module.exports = router

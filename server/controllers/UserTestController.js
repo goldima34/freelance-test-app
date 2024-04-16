@@ -1,6 +1,7 @@
 const UserTestModel = require("../models/UserTestModel");
 
 class UserTestController {
+  //створюємо результат теста
   async create(req, res) {
     try {
       const {
@@ -24,7 +25,7 @@ class UserTestController {
       console.log(error);
     }
   }
-
+  // шукаємо всі результати
   async getAll(req, res){
     try {
       const UserTest = await UserTestModel.findAll()
@@ -33,7 +34,7 @@ class UserTestController {
       console.log(error);
     }
   }
-
+  // видалення
   async delete(req, res) {
     try {
       const { id } = req.body;

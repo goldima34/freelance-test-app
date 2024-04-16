@@ -4,20 +4,20 @@ const router = require("./routers/index")
 
 const PORT = 5000;
 const app = express();
-const sequelize = require('./database');
+const sequelize = require('./database'); // підключення бд
 
 app.use(express.json())
 app.use(cors())
-app.use("/api", router);
+app.use("/api", router); // роутер для маршрутизації по серверу
 
 const start = async () => {
     try {
         await sequelize.authenticate()
             .then(() => {
-                console.log('Подключено к базе данных SQLite!');
+                console.log('Підключення до бази успішне!');
             })
             .catch(error => {
-                console.error('Ошибка подключения к базе данных:', error);
+                console.error('Помилка підключення до бази:', error);
             });
         await sequelize.sync();
         app.listen(PORT, () => {
@@ -28,4 +28,4 @@ const start = async () => {
     }
 };
 
-start();
+start(); // запуск сервера

@@ -1,6 +1,7 @@
 const QuestionModel = require("../models/QuestionModel");
 
 class QuestionController {
+  // створюємо питання по айді теста
   async create(req, res) {
     try {
       const { TestId, Title } = req.body;
@@ -13,7 +14,7 @@ class QuestionController {
       console.log(error);
     }
   }
-
+  // видаляємо питання
   async delete(req, res) {
     try {
       const { id } = req.body;
@@ -23,7 +24,7 @@ class QuestionController {
       console.log(error);
     }
   }
-
+  // шукаємо питання по айді тесту
   async get(req,res) {
     try {
       const { TestId } = req.body;

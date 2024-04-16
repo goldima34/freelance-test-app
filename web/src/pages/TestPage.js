@@ -17,7 +17,7 @@ export const TestPage = () => {
   useEffect(() => {
     getQuestionsByTestId(testId).then((data) => setQuestions(data));
     const intervalId = setInterval(() => {
-      setElapsedTime((prevTime) => prevTime + 10); // Update every 10 milliseconds
+      setElapsedTime((prevTime) => prevTime + 10); // таймер
     }, 10);
 
     return () => clearInterval(intervalId);
@@ -27,11 +27,11 @@ export const TestPage = () => {
     return <div>loading</div>;
   }
 
-  const CompleteTest = () => {
+  const CompleteTest = () => { // закінчити тест
     setCompletedTest(true);
   };
 
-  const ExitTestModal = () => {
+  const ExitTestModal = () => {// покинути тест
     setExitTest(true);
   };
 
@@ -48,7 +48,7 @@ export const TestPage = () => {
 
     return `${formattedMinutes}:${formattedSeconds}`;
   };
-  //sdfg
+
   return (
     <>
       <div className={style.timeCorner}>{formatTime(elapsedTime)}</div>
