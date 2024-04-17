@@ -1,28 +1,33 @@
 import React, { useContext, useState } from "react";
 import styles from "../../styles/cabinet/CabinetNavBar.module.css";
-import { SettingsIcon, SignOutIcon, TestsIcon } from "../micro/Icons";
+import {
+  SettingsIcon,
+  SignOutIcon,
+  StatsIcon,
+  TestsIcon,
+} from "../micro/Icons";
 import { logout } from "../../services/userApi";
 import { useNavigate } from "react-router-dom";
-import {Context} from "../../index"
+import { Context } from "../../index";
 
 const CabinetNavBar = ({ onTabChange }) => {
   const [activeButton, setActiveButton] = useState("tests");
-  const {user} = useContext(Context)
+  const { user } = useContext(Context);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleTabChange = (tab) => {
     setActiveButton(tab);
     onTabChange(tab);
   };
   const logoutClick = () => {
-    logout()
-    navigate("/")
-  }
+    logout();
+    navigate("/");
+  };
   return (
     <>
       <ul className={styles.navigationList}>
-        <img className={styles.logo} src="./Images/USTUDY.svg" alt=""/>
+        <img className={styles.logo} src="./Images/USTUDY.svg" alt="" />
         <li>
           <button
             className={activeButton === "tests" ? styles.active : ""}
@@ -32,28 +37,28 @@ const CabinetNavBar = ({ onTabChange }) => {
             <span>Усі тести</span>
           </button>
         </li>
-        {user.user.role === "викладач" && 
+        {user.user.role === "викладач" && (
           <li>
-          <button
-            className={activeButton === "newTest" ? styles.active : ""}
-            onClick={() => handleTabChange("newTest")}
-          >
-            <TestsIcon />
-            <span>Створити тест</span>
-          </button>
-        </li>
-        }
-        {user.user.role === "викладач" && 
+            <button
+              className={activeButton === "newTest" ? styles.active : ""}
+              onClick={() => handleTabChange("newTest")}
+            >
+              <TestsIcon />
+              <span>Створити тест</span>
+            </button>
+          </li>
+        )}
+        {user.user.role === "викладач" && (
           <li>
-          <button
-            className={activeButton === "raiting" ? styles.active : ""}
-            onClick={() => handleTabChange("raiting")}
-          >
-            <TestsIcon />
-            <span>Оцінки учнів</span>
-          </button>
-        </li>
-        }
+            <button
+              className={activeButton === "raiting" ? styles.active : ""}
+              onClick={() => handleTabChange("raiting")}
+            >
+              <StatsIcon />
+              <span>Рейтинг учнів</span>
+            </button>
+          </li>
+        )}
         <li>
           <button
             className={activeButton === "settings" ? styles.active : ""}
@@ -64,9 +69,7 @@ const CabinetNavBar = ({ onTabChange }) => {
           </button>
         </li>
         <li>
-          <button
-            onClick={logoutClick}
-          >
+          <button onClick={logoutClick}>
             <SignOutIcon />
             <span>Вихід</span>
           </button>

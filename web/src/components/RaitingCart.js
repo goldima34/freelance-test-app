@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getOneUser } from "../services/userApi";
 import { getTestName } from "../services/TestApi";
-import style from "../styles/RaitingCard.module.css";
+import styles from "../styles/RaitingCard.module.css";
 
 export const RaitingCart = ({ raitingData }) => {
   const [userName, setUserName] = useState();
@@ -9,10 +9,12 @@ export const RaitingCart = ({ raitingData }) => {
 
   useEffect(() => {
     try {
-      getOneUser(raitingData.UserId).then(data => setUserName(data.name))
-      getTestName(raitingData.TestId).then(data => data.Title && setTestTitle(data.Title))  
+      getOneUser(raitingData.UserId).then((data) => setUserName(data.name));
+      getTestName(raitingData.TestId).then(
+        (data) => data.Title && setTestTitle(data.Title)
+      );
     } catch (error) {}
-  }, [])
+  }, []);
 
   if (!userName || !testTitle) {
     return <div>loading</div>;
@@ -20,21 +22,20 @@ export const RaitingCart = ({ raitingData }) => {
 
   return (
     <>
-      <div className={style.RaitingCart}>
-        <span>
-          <strong>Назва тесту:</strong> {testTitle}
-        </span>
-        <span>
-          <strong>Студент:</strong> {userName}
-        </span>
-        <span>
-          <strong>Час виконання:</strong> {raitingData.Time}
-        </span>
-        <span>
-          <strong>Правильних:</strong> {raitingData.CorrectAnswerCount}/
-          {raitingData.QuestionsCount}
-        </span>
-      </div>
+      <h2>Статистика</h2>
+      <ul className={styles.statList}>
+        <li className={styles.statBox}>
+          <h3>Топ по оцінкам</h3>
+          <ul className={styles.smallList}>
+            <li>
+              1. Чепушевич Антон <i>20/30</i>
+            </li>
+            <li>
+              2. Чепушевич Антон <i>15/30</i>
+            </li>
+          </ul>
+        </li>
+      </ul>
     </>
   );
 };

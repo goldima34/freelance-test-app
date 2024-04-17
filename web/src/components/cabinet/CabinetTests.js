@@ -31,10 +31,14 @@ const CabinetTests = ({ onTabChange }) => {
         <ul className={styles.testsList}>
           <li>
             <h3>loading</h3>
-            <button onClick={() => handleTabChange("testSettings")}>
-              Детальніше
-            </button>
-            <button onClick={() => handleTabChange("newTest")}>+ Додати</button>
+            <div className={styles.buttonsContainer}>
+              <button onClick={() => handleClick({ testId: test.id })}>
+                Перейти
+              </button>
+              <button onClick={() => handleTabChange("testStats")}>
+                Статистика
+              </button>
+            </div>
           </li>
         </ul>
       </>
@@ -48,9 +52,14 @@ const CabinetTests = ({ onTabChange }) => {
         {tests.map((test) => (
           <li>
             <h3>{test.Title}</h3>
-            <button onClick={() => handleClick({ testId: test.id })}>
-              Перейти
-            </button>
+            <div className={styles.buttonsContainer}>
+              <button onClick={() => handleClick({ testId: test.id })}>
+                Перейти
+              </button>
+              <button onClick={() => handleTabChange("testStats")}>
+                Статистика
+              </button>
+            </div>
           </li>
         ))}
       </ul>

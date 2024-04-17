@@ -22,18 +22,24 @@
   animation: paint 0.6s forwards;
 }
 
+.buttonsContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
 .testsList button {
-  background-color: #6ae56d;
   color: #fff;
   font-size: 12px;
   padding: 10px 45px;
+  background-color: #6ae56d;
   border: 1px solid transparent;
   border-radius: 8px;
   font-weight: 600;
   letter-spacing: 0.5px;
   text-transform: uppercase;
-  margin-top: 15px;
+  margin-top: 20px;
   cursor: pointer;
+  box-shadow: 0 5px 15px rgb(106, 229, 109, 0.7);
 }
 
 @keyframes paint {

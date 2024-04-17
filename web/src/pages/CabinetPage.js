@@ -3,6 +3,7 @@ import NavBar from "../components/cabinet/CabinetNavBar";
 import Tests from "../components/cabinet/CabinetTests";
 import Settings from "../components/cabinet/CabinetSettings";
 import NewTest from "../components/cabinet/CabinetNewTest";
+import TestStat from "../components/cabinet/CabinetTestStat";
 
 import styles from "../styles/cabinet/CabinetPage.module.css";
 import { Context } from "../index";
@@ -19,6 +20,8 @@ const CabinetPage = () => {
         return <Tests onTabChange={setActiveTab} />;
       case "newTest":
         return <NewTest onTabChange={setActiveTab} />;
+      case "testStats":
+        return <TestStat onTabChange={setActiveTab} />;
       case "settings":
         return <Settings />;
       case "raiting":
