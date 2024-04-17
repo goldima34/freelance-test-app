@@ -1,5 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import styles from "../../styles/cabinet/CabinetTestStats.module.css";
+import style from "../../styles/cabinet/CabinetPage.module.css";
 import { useEffect, useState } from "react";
 import { getTestName, getUserTestByTestId } from "../../services/TestApi";
 import { TestStatRaitingCart } from "../TestStatRaitingCart";
@@ -22,7 +23,7 @@ const CabinetTestStat = () => {
   const allStatsSortedByRaiting = allStats.sort(
     (a, b) => b.CorrectAnswerCount - a.CorrectAnswerCount
   );
-  
+
   const allStatsSortedByTime = allStats.sort((a, b) => b.Time - a.Time);
 
   if (!test || !allStats) {
@@ -30,32 +31,35 @@ const CabinetTestStat = () => {
   }
 
   return (
-    <>
-      <h2>Статистика по тесту: {test.Title}</h2>
-      <ul className={styles.statList}>
-        <li className={styles.statBox}>
-          <h3>Топ по оцінкам</h3>
-          <ul className={styles.smallList}>
-            {allStatsSortedByRaiting.map((element, index) => (
-              <TestStatRaitingCart stat={element} index={index} />
-            ))}
-          </ul>
-        </li>
-        <li className={styles.statBox}>
-          <h3>Топ по часу</h3>
-          <ul className={styles.smallList}>
-            {allStatsSortedByTime.map((element, index) => (
-              <TestStatTimeCart stat={element} index={index}/>
-            ))}
-          </ul>
-        </li>
-      </ul>
-      <button
-        className={styles.backButton}
-        onClick={() => navigate("/cabinet")}>
-        Назад
-      </button>
-    </>
+    <div className={style.CabinetPageBody}>
+      <div className={style.block}>
+        <h2>Статистика по тесту: {test.Title}</h2>
+        <ul className={styles.statList}>
+          <li className={styles.statBox}>
+            <h3>Топ по оцінкам</h3>
+            <ul className={styles.smallList}>
+              {allStatsSortedByRaiting.map((element, index) => (
+                <TestStatRaitingCart stat={element} index={index} />
+              ))}
+            </ul>
+          </li>
+          <li className={styles.statBox}>
+            <h3>Топ по часу</h3>
+            <ul className={styles.smallList}>
+              {allStatsSortedByTime.map((element, index) => (
+                <TestStatTimeCart stat={element} index={index} />
+              ))}
+            </ul>
+          </li>
+        </ul>
+        <button
+          className={styles.backButton}
+          onClick={() => navigate("/cabinet")}
+        >
+          Назад
+        </button>
+      </div>
+    </div>
   );
 };
 
