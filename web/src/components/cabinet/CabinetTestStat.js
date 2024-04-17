@@ -1,50 +1,58 @@
+import { useLocation, useNavigate } from "react-router-dom";
 import styles from "../../styles/cabinet/CabinetTestStats.module.css";
+import { useEffect, useState } from "react";
+import { getTestName, getUserTestByTestId } from "../../services/TestApi";
+import { TestStatRaitingCart } from "../TestStatRaitingCart";
+import { TestStatTimeCart } from "../TestStatTimeCart";
 
-const CabinetTestStat = ({ onTabChange }) => {
-  const handleTabChange = (tab) => {
-    onTabChange(tab);
-  };
+const CabinetTestStat = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const testId = location.state.data;
+
+  const [test, setTest] = useState();
+  const [allStats, setAllStats] = useState([]);
+
+  useEffect(() => {
+    getTestName(testId).then((data) => setTest(data));
+    getUserTestByTestId(testId).then((data) => setAllStats(data));
+  }, [testId, allStats]);
+
+  const allStatsSortedByRaiting = allStats.sort(
+    (a, b) => b.CorrectAnswerCount - a.CorrectAnswerCount
+  );
+  
+  const allStatsSortedByTime = allStats.sort((a, b) => b.Time - a.Time);
+
+  if (!test || !allStats) {
+    return <>loading</>;
+  }
 
   return (
     <>
-      <h2>Статистика</h2>
+      <h2>Статистика по тесту: {test.Title}</h2>
       <ul className={styles.statList}>
         <li className={styles.statBox}>
           <h3>Топ по оцінкам</h3>
           <ul className={styles.smallList}>
-            <li>
-              1. Чепушевич Антон <i>20/30</i>
-            </li>
-            <li>
-              2. Чепушевич Антон <i>15/30</i>
-            </li>
+            {allStatsSortedByRaiting.map((element, index) => (
+              <TestStatRaitingCart stat={element} index={index} />
+            ))}
           </ul>
         </li>
         <li className={styles.statBox}>
           <h3>Топ по часу</h3>
           <ul className={styles.smallList}>
-            <li>
-              1. Чепушевич Антон <i>00:30</i>
-            </li>
-            <li>
-              2. Чепушевич Антон <i>00:35</i>
-            </li>
-            <li>
-              3. Чепушевич Антон <i>00:35</i>
-            </li>
-            <li>
-              4. Чепушевич Антон <i>00:35</i>
-            </li>
-            <li>
-              5. Чепушевич Антон <i>00:35</i>
-            </li>
+            {allStatsSortedByTime.map((element, index) => (
+              <TestStatTimeCart stat={element} index={index}/>
+            ))}
           </ul>
         </li>
       </ul>
       <button
         className={styles.backButton}
-        onClick={() => handleTabChange("tests")}
-      >
+        onClick={() => navigate("/cabinet")}>
         Назад
       </button>
     </>

@@ -3,7 +3,7 @@ import styles from "../../styles/cabinet/CabinetTests.module.css";
 import { getAllTests } from "../../services/TestApi";
 import { useNavigate } from "react-router-dom";
 
-const CabinetTests = ({ onTabChange }) => {
+const CabinetTests = ({ onTabChange, test }) => {
   const [tests, setTests] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -15,6 +15,11 @@ const CabinetTests = ({ onTabChange }) => {
 
   const handleClick = (data) => {
     navigate("/test", { state: { data } }); // Pass data as state
+  };
+
+  const handleClickStat = (data) => {
+    handleTabChange("testStats")
+    navigate("/testStat", { state: { data } }); // Pass data as state
   };
 
   useEffect(() => {
@@ -31,14 +36,6 @@ const CabinetTests = ({ onTabChange }) => {
         <ul className={styles.testsList}>
           <li>
             <h3>loading</h3>
-            <div className={styles.buttonsContainer}>
-              <button onClick={() => handleClick({ testId: test.id })}>
-                Перейти
-              </button>
-              <button onClick={() => handleTabChange("testStats")}>
-                Статистика
-              </button>
-            </div>
           </li>
         </ul>
       </>
@@ -56,7 +53,7 @@ const CabinetTests = ({ onTabChange }) => {
               <button onClick={() => handleClick({ testId: test.id })}>
                 Перейти
               </button>
-              <button onClick={() => handleTabChange("testStats")}>
+              <button onClick={() => handleClickStat(test.id)}>
                 Статистика
               </button>
             </div>

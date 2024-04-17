@@ -20,10 +20,12 @@ const CabinetNavBar = ({ onTabChange }) => {
     setActiveButton(tab);
     onTabChange(tab);
   };
+  
   const logoutClick = () => {
     logout();
     navigate("/");
   };
+
   return (
     <>
       <ul className={styles.navigationList}>

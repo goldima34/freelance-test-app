@@ -14,6 +14,7 @@ const CabinetPage = () => {
   const [activeTab, setActiveTab] = useState("tests");
   const { user } = useContext(Context);
   const navigate = useNavigate();
+  
   const renderTabContent = () => {
     switch (activeTab) {
       case "tests":
@@ -21,7 +22,7 @@ const CabinetPage = () => {
       case "newTest":
         return <NewTest onTabChange={setActiveTab} />;
       case "testStats":
-        return <TestStat onTabChange={setActiveTab} />;
+        return <TestStat />;
       case "settings":
         return <Settings />;
       case "raiting":

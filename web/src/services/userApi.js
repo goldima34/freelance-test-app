@@ -15,6 +15,10 @@ export const getOneUser = async (id) => {
   return data;
 };
 
+export const getUserById = async (id) => {
+  const { data } = await $api.post("/user/getById", { id});
+  return data;
+};
 
 export const login = async (email, password) => {
   const { data } = await $api.post("/user/login", { email, password });

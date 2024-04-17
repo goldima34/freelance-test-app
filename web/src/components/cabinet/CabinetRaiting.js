@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { getUserTest } from "../../services/TestApi";
 import styles from "../../styles/RaitingCard.module.css";
+import { findByCountTest, findByRaiting } from "../../services/TestApi";
 
 export const CabinetRaiting = () => {
-  const [raitingData, setRaitingData] = useState();
+  const [sortedByTests, setSortedByTests] = useState();
+  const [sortedByRaiting, setSortedByRaiting] = useState();
 
   useEffect(() => {
-    getUserTest().then((data) => setRaitingData(data));
+    findByCountTest().then((data) => setSortedByTests(data));
+    findByRaiting().then((data) => setSortedByRaiting(data));
   }, []);
 
-  if (!raitingData) {
-    return <div>loading</div>;
+  if (!sortedByTests || !sortedByRaiting) {
+    return <>loading</>;
   }
-
-  // Як знайти рейтинг: Береш проходиш по юзерам, береш тести які вони проходили, береш у теста питання (всього питань кількість ділиш на кількість превельних питань)
-  // Так сумуєш ці значення по кожному тесту, а потім ділиш це значення на кількість тестів, і чім більше число тим успішніше учень
 
   return (
     <>
@@ -23,16 +22,20 @@ export const CabinetRaiting = () => {
         <li className={styles.statBox}>
           <h3>Топ по оцінкам</h3>
           <ul className={styles.smallList}>
-            {raitingData.map((data) => (
-              <li>1. ктото</li>
+            {sortedByRaiting.map((element, index) => (
+              <li>
+                {index + 1}. {element.name} - {element.correctAnswerCount} / {element.questionsCount}
+              </li>
             ))}
           </ul>
         </li>
         <li className={styles.statBox}>
           <h3>Кількість зданих тестів</h3>
           <ul className={styles.smallList}>
-            {raitingData.map((data) => (
-              <li>1. ктото</li>
+            {sortedByTests.map((element, index) => (
+              <li>
+                {index + 1}. {element.name} - {element.count}
+              </li>
             ))}
           </ul>
         </li>

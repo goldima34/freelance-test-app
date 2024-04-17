@@ -1,3 +1,4 @@
+const { query } = require("express");
 const UserModel = require("../models/UserModel");
 const bcrypt = require("bcrypt");
 
@@ -84,6 +85,17 @@ class UserController {
       res.json(userData);
     } catch (e) {
       console.log(e);
+    }
+  }
+
+  async getById(req,res) {
+    try {
+      const { id } = req.body;
+
+      const userData = await UserModel.findOne({ where: { id } });
+      res.json(userData);
+    } catch (error) {
+      console.log(error)
     }
   }
 
