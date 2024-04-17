@@ -67,6 +67,7 @@ export const createTest = async (testTitle, questions, UserId) => {
     const newAnswers = element.answers.filter(
       (answers, index) => index !== element.correctAnswerIndex
     );
+    
     for (const answers of newAnswers) {
       $api.post("/answer/create", {
         QuestionId,
