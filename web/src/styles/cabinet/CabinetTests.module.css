@@ -27,7 +27,22 @@
   justify-content: space-between;
 }
 
-.testsList button {
+.button_decline {
+  color: #fff;
+  font-size: 12px;
+  padding: 10px 45px;
+  background-color: #ff4d4dc6;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-top: 20px;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(255, 77, 77, 0.7);
+}
+
+.button_accept {
   color: #fff;
   font-size: 12px;
   padding: 10px 45px;
@@ -46,6 +61,7 @@
   0% {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   }
+
   100% {
     box-shadow: 0 5px 15px rgb(106, 229, 109, 0.7);
   }

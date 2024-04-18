@@ -77,9 +77,9 @@ class UserTestController {
       const UserTest = await UserTestModel.findAll({
         where: { UserId: user.id },
       });
-      let correctAnswerCount = 0
+      let correctAnswerCount = 0;
       let questionsCount = 0;
-      for (const test of UserTest){
+      for (const test of UserTest) {
         correctAnswerCount += test.CorrectAnswerCount;
         questionsCount += test.QuestionsCount;
       }
@@ -89,6 +89,32 @@ class UserTestController {
     }
 
     return res.json(data);
+  }
+
+  async SortByTime(req, res) {
+    const UserTest = await UserTestModel.findAll();
+    const UserTestSorted = UserTest.sort((a, b) => {
+      const [minutesA, secondsA] = a.Time.split(":");
+      const [minutesB, secondsB] = b.Time.split(":");
+      const minutesInMillisecondsA = parseInt(minutesA) * 60000;
+      const secondsInMillisecondsA = parseInt(secondsA) * 1000;
+      const minutesInMillisecondsB = parseInt(minutesB) * 60000;
+      const secondsInMillisecondsB = parseInt(secondsB) * 1000;
+      const totalMillisecondsA =
+        minutesInMillisecondsA + secondsInMillisecondsA;
+      const totalMillisecondsB =
+        minutesInMillisecondsB + secondsInMillisecondsB;
+      return totalMillisecondsA - totalMillisecondsB;
+    });
+    return res.json(UserTestSorted);
+  }
+
+  async SortByRaiting(req, res) {
+    const UserTest = await UserTestModel.findAll();
+    const UserTestSorted = UserTest.sort(
+      (a, b) => b.CorrectAnswerCount - a.CorrectAnswerCount
+    );
+    return res.json(UserTestSorted);
   }
 }
 

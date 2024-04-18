@@ -20,7 +20,6 @@ export const TestForm = ({ question }) => {
         localStorage.setItem("correctAnswers", currentCorrectAnswers + 1);
       }
     }
-    console.log(localStorage.getItem("correctAnswers"));
   };
 
   if (!answers) {

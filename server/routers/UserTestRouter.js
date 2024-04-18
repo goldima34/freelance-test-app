@@ -9,5 +9,7 @@ router.get("/get", UserTestController.getAll);
 router.post("/getById", UserTestController.getById);
 router.get("/findByCountTest", UserTestController.findByCountTest);
 router.get("/findByRaiting", UserTestController.findByRaiting);
+router.get("/sortByTime", UserTestController.SortByTime);
+router.get("/sortByRaiting", UserTestController.SortByRaiting);
 
 module.exports = router;

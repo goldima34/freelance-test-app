@@ -1,4 +1,5 @@
 const TestModel = require("../models/TestModel");
+const QuestionModel = require("../models/QuestionModel");
 
 class TestController {
   // створюємо тест і вносим айді користувача який його створює
@@ -18,12 +19,13 @@ class TestController {
   async delete(req, res) {
     try {
       const { id } = req.body;
-      const Test = await TestModel.findOneAndDelete({ id: id });
-      return res.json(Test);
+      const Test = await TestModel.destroy({where:{ id: id }});
+      const Questions = await QuestionModel.destroy({ where: { TestId: id } });
+      return res.json({Test, Questions})
     } catch (error) {
       console.log(error);
     }
-  }
+  } 
   // шукаємо всі тести
   async getAll(req, res) {
     try {

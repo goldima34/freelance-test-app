@@ -88,3 +88,18 @@ export const findByRaiting = async () => {
   const { data } = await $api.get("/userTest/findByRaiting");
   return data;
 };
+
+export const deleteTest = async (id) =>{
+  const { data } = await $api.post("/test/delete", { id });
+  return data;
+}
+
+export const SortByRaiting = async(id) =>{
+  const { data } = await $api.get("/userTest/sortByRaiting");
+  return data;
+}
+
+export const SortByTime = async (id) => {
+  const { data } = await $api.get("/userTest/sortByTime");
+  return data;
+};

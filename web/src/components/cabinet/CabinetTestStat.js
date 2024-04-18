@@ -2,7 +2,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import styles from "../../styles/cabinet/CabinetTestStats.module.css";
 import style from "../../styles/cabinet/CabinetPage.module.css";
 import { useEffect, useState } from "react";
-import { getTestName, getUserTestByTestId } from "../../services/TestApi";
+import { SortByRaiting, SortByTime, getTestName } from "../../services/TestApi";
 import { TestStatRaitingCart } from "../TestStatRaitingCart";
 import { TestStatTimeCart } from "../TestStatTimeCart";
 
@@ -13,20 +13,16 @@ const CabinetTestStat = () => {
   const testId = location.state.data;
 
   const [test, setTest] = useState();
-  const [allStats, setAllStats] = useState([]);
+  const [sortedByRaiting, setSortedByRaiting] = useState([]);
+  const [sortedByTime, setSortedByTime] = useState([]);
 
   useEffect(() => {
     getTestName(testId).then((data) => setTest(data));
-    getUserTestByTestId(testId).then((data) => setAllStats(data));
-  }, [testId, allStats]);
+    SortByRaiting(testId).then((data) => setSortedByRaiting(data));
+    SortByTime(testId).then((data) => setSortedByTime(data));
+  }, [testId, sortedByRaiting, sortedByTime]);
 
-  const allStatsSortedByRaiting = allStats.sort(
-    (a, b) => b.CorrectAnswerCount - a.CorrectAnswerCount
-  );
-
-  const allStatsSortedByTime = allStats.sort((a, b) => b.Time - a.Time);
-
-  if (!test || !allStats) {
+  if (!test || !sortedByTime || !sortedByRaiting) {
     return <>loading</>;
   }
 
@@ -38,7 +34,7 @@ const CabinetTestStat = () => {
           <li className={styles.statBox}>
             <h3>Топ по оцінкам</h3>
             <ul className={styles.smallList}>
-              {allStatsSortedByRaiting.map((element, index) => (
+              {sortedByRaiting.map((element, index) => (
                 <TestStatRaitingCart stat={element} index={index} />
               ))}
             </ul>
@@ -46,7 +42,7 @@ const CabinetTestStat = () => {
           <li className={styles.statBox}>
             <h3>Топ по часу</h3>
             <ul className={styles.smallList}>
-              {allStatsSortedByTime.map((element, index) => (
+              {sortedByTime.map((element, index) => (
                 <TestStatTimeCart stat={element} index={index} />
               ))}
             </ul>
@@ -54,8 +50,7 @@ const CabinetTestStat = () => {
         </ul>
         <button
           className={styles.backButton}
-          onClick={() => navigate("/cabinet")}
-        >
+          onClick={() => navigate("/cabinet")}>
           Назад
         </button>
       </div>
