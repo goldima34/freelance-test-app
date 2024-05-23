@@ -8,9 +8,7 @@
 
 Запуск
 Термінал 1: 
-cd server
-npm run dev
+cd server && npm run dev
 
 Термінал 2:
-cd web 
-npm start
+cd web && npm start
